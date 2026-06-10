@@ -1,438 +1,1593 @@
 ﻿<!doctype html>
 <html lang="en">
-  <head>
-    <title>Pelben Pharmacy</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Lato"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="static/css/style.css" />
-  </head>
-  <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button
-            type="button"
-            class="navbar-toggle"
-            data-toggle="collapse"
-            data-target="#myNavbar"
-          >
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#myPage">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#about">About</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Our Work</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pelben Pharmacy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <div class="jumbotron text-center">
-      <h1>PELBEN PHARMACY</h1>
-      <p>
-        We specialize in professional pharmacy services, routine health
-        maintenance, and accurate medical consultations to keep your family
-        healthy and well-cared for.
-      </p>
-      <form>
-        <div class="input-group search-bar">
-          <input
-            type="email"
-            class="form-control"
-            size="50"
-            placeholder="Email Address"
-            required
-          />
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-danger">Subscribe</button>
-          </div>
-        </div>
-      </form>
+    :root {
+      --teal-50:  #E1F5EE;
+      --teal-100: #9FE1CB;
+      --teal-200: #5DCAA5;
+      --teal-400: #1D9E75;
+      --teal-600: #0F6E56;
+      --teal-800: #085041;
+      --teal-900: #04342C;
+      --amber-400: #EF9F27;
+      --amber-600: #BA7517;
+      --warm-white: #F9F8F5;
+      --off-white:  #F2F0EA;
+      --text-dark:  #1A1A1A;
+      --text-mid:   #4A4A4A;
+      --text-light: #7A7A7A;
+      --border:     #E0DDD6;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--warm-white);
+      color: var(--text-dark);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── UTILITIES ── */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
+    .section-sm { padding: 72px 0; }
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal-600);
+      background: var(--teal-50);
+      border: 1px solid var(--teal-100);
+      border-radius: 100px;
+      padding: 4px 14px;
+      margin-bottom: 20px;
+    }
+    h2.section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    p.section-sub {
+      font-size: 17px;
+      color: var(--text-mid);
+      max-width: 560px;
+      line-height: 1.75;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--teal-600);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-primary:hover { background: var(--teal-800); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--teal-600);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 13px 28px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--teal-600);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+    .btn-secondary:hover { background: var(--teal-50); transform: translateY(-1px); }
+    .btn-amber {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber-400);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+    .btn-amber:hover { background: var(--amber-600); transform: translateY(-1px); }
+
+    /* scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0;
+      transition: all var(--transition);
+    }
+    nav.scrolled {
+      background: rgba(249, 248, 245, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-mark {
+      width: 34px; height: 34px;
+      background: var(--teal-600);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-mark svg { width: 18px; height: 18px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .nav-logo-text {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--teal-900);
+      letter-spacing: -0.01em;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--teal-600); }
+    .nav-cta {
+      background: var(--teal-600);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: var(--radius-sm);
+      font-weight: 500 !important;
+      transition: background var(--transition) !important;
+    }
+    .nav-cta:hover { background: var(--teal-800) !important; color: #fff !important; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text-dark);
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: var(--warm-white);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px 28px;
+      z-index: 99;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 16px;
+      color: var(--text-dark);
+      text-decoration: none;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+      padding-top: 68px;
+    }
+    .hero-content { padding: 80px 0 80px 0; }
+    .hero-trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px 16px 6px 8px;
+      margin-bottom: 32px;
+      font-size: 13px;
+      color: var(--text-mid);
+      animation: badge-in 0.8s ease both;
+    }
+    .hero-trust-dot {
+      width: 8px; height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    @keyframes badge-in {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--teal-900);
+      margin-bottom: 24px;
+      animation: fade-up 0.9s 0.15s ease both;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--teal-600);
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 480px;
+      animation: fade-up 0.9s 0.25s ease both;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+      animation: fade-up 0.9s 0.35s ease both;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      animation: fade-up 0.9s 0.45s ease both;
+    }
+    .hero-stat-item { }
+    .hero-stat-number {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--teal-800);
+      line-height: 1;
+    }
+    .hero-stat-label {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+    .hero-stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+      align-self: center;
+    }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-visual {
+      position: relative;
+      animation: fade-up 1s 0.3s ease both;
+    }
+    .hero-img-wrap {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      background: var(--teal-50);
+    }
+    .hero-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-img-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(145deg, var(--teal-50) 0%, var(--teal-100) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--teal-600);
+    }
+    .hero-img-placeholder svg { width: 48px; height: 48px; opacity: 0.5; }
+    .hero-img-placeholder span { font-size: 13px; opacity: 0.6; }
+    .hero-float-card {
+      position: absolute;
+      bottom: 28px;
+      left: -28px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: float 4s ease-in-out infinite;
+      box-shadow: 0 4px 24px rgba(4, 52, 44, 0.08);
+    }
+    .hero-float-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--teal-50);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .hero-float-icon svg { width: 20px; height: 20px; stroke: var(--teal-600); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .hero-float-text p:first-child { font-size: 13px; font-weight: 500; color: var(--text-dark); }
+    .hero-float-text p:last-child { font-size: 12px; color: var(--text-light); }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; min-height: auto; padding: 100px 24px 60px; gap: 40px; }
+      .hero-visual { max-width: 480px; margin: 0 auto; }
+      .hero-float-card { left: -10px; }
+    }
+    @media (max-width: 480px) {
+      .hero-stats { gap: 20px; }
+      .hero-actions { flex-direction: column; }
+    }
+
+    /* ── ABOUT ── */
+    #about { background: #fff; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-img-stack {
+      position: relative;
+    }
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--teal-50);
+    }
+    .about-img-secondary {
+      position: absolute;
+      bottom: -24px;
+      right: -24px;
+      width: 55%;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--off-white);
+      border: 5px solid #fff;
+    }
+    .img-placeholder {
+      width: 100%; height: 100%;
+      background: var(--off-white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--text-light);
+      object-fit: cover;
+    }
+    .img-placeholder svg { width: 36px; height: 36px; opacity: 0.45; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .img-placeholder span { font-size: 12px; }
+    .about-content { padding-right: 20px; }
+    .about-features { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+    .about-feature {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .about-feature-icon {
+      width: 42px; height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--teal-50);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .about-feature-icon svg { width: 18px; height: 18px; stroke: var(--teal-600); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .about-feature-text h4 { font-size: 15px; font-weight: 500; margin-bottom: 4px; color: var(--text-dark); }
+    .about-feature-text p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-content { padding-right: 0; }
+      .about-img-secondary { bottom: -16px; right: -12px; }
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--warm-white); }
+    .services-header { margin-bottom: 56px; }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      cursor: default;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--teal-200);
+      box-shadow: 0 12px 40px rgba(4, 52, 44, 0.08);
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      border-radius: var(--radius-sm);
+      background: var(--teal-50);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .service-icon svg { width: 22px; height: 22px; stroke: var(--teal-600); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .service-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 10px; color: var(--text-dark); }
+    .service-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+    @media (max-width: 900px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .services-grid { grid-template-columns: 1fr; } }
+
+    /* ── WHY US ── */
+    #why-us { background: var(--teal-900); }
+    .why-us-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .why-us-content { }
+    .why-us-content .eyebrow {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+      color: var(--teal-100);
+    }
+    .why-us-content h2 { color: #fff; }
+    .why-us-content p.section-sub { color: rgba(255,255,255,0.7); }
+    .why-us-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .why-stat {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 24px;
+    }
+    .why-stat-num {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 500;
+      color: var(--teal-100);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+    .why-us-visual {
+      position: relative;
+    }
+    .why-img-main {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: rgba(255,255,255,0.06);
+    }
+    .why-img-main .img-placeholder { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.35); }
+    .mission-card {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      background: #fff;
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      max-width: 200px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+    .mission-card p:first-child { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-600); margin-bottom: 6px; }
+    .mission-card p:last-child { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+
+    @media (max-width: 768px) {
+      .why-us-inner { grid-template-columns: 1fr; gap: 48px; }
+      .why-us-stats { gap: 16px; }
+      .mission-card { right: 0; top: -12px; }
+    }
+
+    /* ── PRICING ── */
+    #pricing { background: #fff; }
+    .pricing-header { text-align: center; margin-bottom: 56px; }
+    .pricing-header .section-sub { margin: 0 auto; text-align: center; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    .pricing-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: transform var(--transition);
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card.featured {
+      border: 2px solid var(--teal-400);
+      position: relative;
+    }
+    .featured-badge {
+      position: absolute;
+      top: -1px; left: 50%; transform: translateX(-50%);
+      background: var(--teal-600);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 0 0 8px 8px;
+    }
+    .pricing-top {
+      padding: 36px 28px 28px;
+      background: var(--warm-white);
+    }
+    .pricing-card.featured .pricing-top { background: var(--teal-50); }
+    .pricing-plan { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-600); margin-bottom: 12px; }
+    .pricing-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .pricing-currency { font-size: 18px; font-weight: 500; color: var(--text-mid); }
+    .pricing-amount {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1;
+    }
+    .pricing-desc { font-size: 14px; color: var(--text-light); }
+    .pricing-body { padding: 28px; }
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-mid);
+    }
+    .check-icon {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--teal-50);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .check-icon svg { width: 10px; height: 10px; stroke: var(--teal-600); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .pricing-cta { display: block; width: 100%; text-align: center; padding: 13px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 500; text-decoration: none; cursor: pointer; border: 1.5px solid var(--teal-600); color: var(--teal-600); background: transparent; transition: all var(--transition); }
+    .pricing-cta:hover { background: var(--teal-50); }
+    .pricing-card.featured .pricing-cta { background: var(--teal-600); color: #fff; border-color: var(--teal-600); }
+    .pricing-card.featured .pricing-cta:hover { background: var(--teal-800); }
+
+    @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--warm-white); }
+    .testimonials-header { margin-bottom: 56px; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testimonial-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 32px 28px;
+    }
+    .testimonial-quote {
+      font-family: var(--font-display);
+      font-size: 40px;
+      line-height: 0.8;
+      color: var(--teal-200);
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+    .testimonial-text {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--teal-50);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--teal-800);
+      flex-shrink: 0;
+    }
+    .author-name { font-size: 14px; font-weight: 500; color: var(--text-dark); }
+    .author-location { font-size: 13px; color: var(--text-light); }
+    .stars { display: flex; gap: 2px; margin-bottom: 16px; }
+    .star { width: 14px; height: 14px; fill: var(--amber-400); }
+
+    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; } }
+
+    /* ── PORTFOLIO STRIP ── */
+    #portfolio { background: #fff; }
+    .portfolio-header { margin-bottom: 48px; }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .portfolio-item {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4 / 3;
+      background: var(--off-white);
+      cursor: pointer;
+    }
+    .portfolio-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .portfolio-item:hover img { transform: scale(1.04); }
+    .portfolio-item .img-placeholder { height: 100%; }
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(4,52,44,0.85) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity var(--transition);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-overlay-text h4 { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 4px; }
+    .portfolio-overlay-text p { font-size: 13px; color: rgba(255,255,255,0.75); }
+
+    @media (max-width: 768px) { .portfolio-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { .portfolio-grid { grid-template-columns: 1fr; } }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--warm-white); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-info h2 { margin-bottom: 16px; }
+    .contact-info p.section-sub { margin-bottom: 40px; }
+    .contact-details { display: flex; flex-direction: column; gap: 20px; }
+    .contact-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .contact-icon {
+      width: 42px; height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--teal-50);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 18px; height: 18px; stroke: var(--teal-600); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .contact-item-label { font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 2px; }
+    .contact-item-value { font-size: 15px; color: var(--text-dark); }
+    .contact-form { background: #fff; border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 13px; font-weight: 500; color: var(--text-dark); }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--text-dark);
+      background: var(--warm-white);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--teal-400); background: #fff; }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-submit { width: 100%; padding: 14px; background: var(--teal-600); color: #fff; border: none; border-radius: var(--radius-sm); font-family: var(--font-body); font-size: 15px; font-weight: 500; cursor: pointer; transition: background var(--transition); }
+    .form-submit:hover { background: var(--teal-800); }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 24px; }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--teal-900);
+      padding: 64px 0 40px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+    .footer-brand .nav-logo { margin-bottom: 16px; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 240px; }
+    .footer-col h5 { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: 0.05em; margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color var(--transition); }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .footer-logo-text { color: rgba(255,255,255,0.9) !important; }
+
+    @media (max-width: 768px) {
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; }
+    }
+
+    /* ── SUBSCRIBE BANNER ── */
+    .subscribe-banner {
+      background: var(--teal-600);
+      padding: 56px 0;
+    }
+    .subscribe-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .subscribe-copy h3 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .subscribe-copy p { font-size: 15px; color: rgba(255,255,255,0.75); }
+    .subscribe-form {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .subscribe-form input {
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: none;
+      font-family: var(--font-body);
+      font-size: 14px;
+      min-width: 260px;
+      outline: none;
+      background: rgba(255,255,255,0.95);
+      color: var(--text-dark);
+    }
+    .subscribe-form button {
+      background: var(--teal-900);
+      color: #fff;
+      border: none;
+      padding: 12px 22px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition);
+      white-space: nowrap;
+    }
+    .subscribe-form button:hover { background: #000; }
+
+    @media (max-width: 768px) {
+      .subscribe-inner { flex-direction: column; align-items: flex-start; }
+      .subscribe-form { flex-direction: column; width: 100%; }
+      .subscribe-form input { min-width: 0; width: 100%; }
+    }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      width: 44px; height: 44px;
+      background: var(--teal-600);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: all var(--transition);
+      z-index: 99;
+      border: none;
+      box-shadow: 0 4px 16px rgba(4,52,44,0.25);
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: all; }
+    .back-to-top:hover { background: var(--teal-800); transform: translateY(-2px); }
+    .back-to-top svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="#hero">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      </div>
+      <span class="nav-logo-text">Pelben Pharmacy</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Our Work</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact" class="nav-cta">Contact us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about" class="mobile-link">About</a>
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#portfolio" class="mobile-link">Our Work</a>
+  <a href="#pricing" class="mobile-link">Pricing</a>
+  <a href="#contact" class="mobile-link">Contact us</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="container">
+  <div class="hero-content">
+    <div class="hero-trust-badge">
+      <span class="hero-trust-dot"></span>
+      Open today · 8:00 AM – 8:00 PM
     </div>
-
-    <!-- About Section -->
-    <div id="about" class="container-fluid">
-      <div class="row">
-        <div class="col-sm-8">
-          <h2>About Pelben Pharmacy</h2>
-          <br />
-          <h4>
-            We are a trusted pharmacy dedicated to providing quality healthcare solutions and exceptional service for all your health needs.
-          </h4>
-          <p>
-            Our experienced pharmacists provide a comprehensive range of services, including prescription dispensing, health consultations, and medication management. Using modern technology and evidence-based practices, we help address your health concerns efficiently, saving you both time and money. Guided by integrity, professionalism, and genuine care, we are committed to delivering personalized attention and exceptional service to every patient.
-          </p>
-          <br />
-          <a href="#contact" class="btn btn-default btn-lg">Get in Touch</a>
-        </div>
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-heart logo"></span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Values Section -->
-    <div class="container-fluid bg-grey">
-      <div class="row">
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-globe logo slideanim"></span>
-        </div>
-        <div class="col-sm-8">
-          <h2>Our Values</h2>
-          <br />
-          <h4>
-            <strong>Mission:</strong> To enhance community health and well-being by delivering honest, efficient, and affordable pharmacy services. We are committed to helping our patients save time and money while providing personalized care tailored to their unique needs.
-          </h4>
-          <br />
-          <p>
-            <strong>Vision:</strong> To become the leading community pharmacy, renowned for transforming healthcare through innovation, compassion, and excellence—making trusted, affordable care effortless and accessible to every family we serve.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Services Section -->
-    <div id="services" class="container-fluid text-center">
-      <h2>Our Services</h2>
-      <h4>Prescription Management, Specialized Care &amp; Wellness</h4>
-      <br />
-      <div class="row slideanim">
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-list-alt logo-small"></span>
-          <h4>Prescription Management</h4>
-          <p>
-            Accurate dispensing, automated refills, and medication
-            synchronization to save you time.
-          </p>
-        </div>
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-user logo-small"></span>
-          <h4>Specialized Care</h4>
-          <p>
-            Personalized health consultations and specialized treatment plans
-            tailored to your needs.
-          </p>
-        </div>
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-plus-sign logo-small"></span>
-          <h4>Wellness &amp; Testing</h4>
-          <p>
-            Routine immunizations, point-of-care health screenings, and
-            personalized medication therapy reviews.
-          </p>
-        </div>
-      </div>
-      <br /><br />
-      <div class="row slideanim">
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-book logo-small"></span>
-          <h4>Health Education &amp; Advice</h4>
-          <p>
-            Guidance on minor ailments, healthy lifestyles, nutrition, and
-            disease prevention.
-          </p>
-        </div>
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-bell logo-small"></span>
-          <h4>Monitoring &amp; Support</h4>
-          <p>
-            Medication adherence support plus programs for smoking cessation,
-            weight management, and other wellness goals.
-          </p>
-        </div>
-        <div class="col-sm-4">
-          <span class="glyphicon glyphicon-flash logo-small"></span>
-          <h4>Emergency Medication Supply</h4>
-          <p>
-            Limited emergency supplies of essential medications when a
-            prescription is temporarily unavailable.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Portfolio Section -->
-    <div id="portfolio" class="container-fluid text-center bg-grey">
-      <h2>Our Work</h2>
-      <br />
-      <h4>A Glimpse of What We Do</h4>
-      <div class="row text-center slideanim">
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img
-              src="media/images/prescription.jpg"
-              alt="Prescription Dispensing"
-              width="400"
-              height="300"
-            />
-            <p><strong>Prescription Dispensing</strong></p>
-            <p>Accurate and timely dispensing of prescribed medications</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img
-              src="media/images/vaccination.jpg"
-              alt="Vaccinations"
-              width="400"
-              height="300"
-            />
-            <p><strong>Vaccinations</strong></p>
-            <p>Flu, travel, and routine vaccines administered on-site</p>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="thumbnail">
-            <img
-              src="media/images/screening.jpg"
-              alt="Health Screenings"
-              width="400"
-              height="300"
-            />
-            <p><strong>Health Screenings</strong></p>
-            <p>Blood pressure, glucose, and cholesterol checks available</p>
-          </div>
-        </div>
-      </div>
-      <br />
-
-      <!-- Testimonials -->
-      <h2>What Our Customers Say</h2>
-      <div
-        id="myCarousel"
-        class="carousel slide text-center"
-        data-ride="carousel"
-      >
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <h4>
-              "The staff are always friendly, professional, and ready to help. I
-              get my prescriptions quickly and receive clear advice on how to
-              take my medications."<br />
-              <span>Kwame Mensah, Tse Addo, Accra</span>
-            </h4>
-          </div>
-          <div class="item">
-            <h4>
-              "Excellent customer service! The pharmacists take the time to
-              answer my questions and make sure I understand my treatment."<br />
-              <span>Akosua Baah, East Legon, Accra</span>
-            </h4>
-          </div>
-          <div class="item">
-            <h4>
-              "The pharmacy offers a wide range of medicines and healthcare
-              products. Their team genuinely cares about customers' health and
-              well-being."<br />
-              <span>Yaw Boateng, Cantonment, Accra</span>
-            </h4>
-          </div>
-        </div>
-        <a
-          class="left carousel-control"
-          href="#myCarousel"
-          role="button"
-          data-slide="prev"
-        >
-          <span
-            class="glyphicon glyphicon-chevron-left"
-            aria-hidden="true"
-          ></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a
-          class="right carousel-control"
-          href="#myCarousel"
-          role="button"
-          data-slide="next"
-        >
-          <span
-            class="glyphicon glyphicon-chevron-right"
-            aria-hidden="true"
-          ></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-
-    <!-- Pricing Section -->
-    <div id="pricing" class="container-fluid">
-      <div class="text-center">
-        <h2>Our Service Packages</h2>
-        <h4>Choose a plan that works for you</h4>
-      </div>
-      <div class="row slideanim">
-        <!-- Basic -->
-        <div class="col-sm-4 col-xs-12">
-          <div class="panel panel-default text-center">
-            <div class="panel-heading">
-              <h1>Basic</h1>
-            </div>
-            <div class="panel-body">
-              <p><strong>✔</strong> Prescription dispensing</p>
-              <p><strong>✔</strong> OTC medication advice</p>
-              <p><strong>✔</strong> Blood pressure check</p>
-              <p><strong>✔</strong> Basic health consultation</p>
-              <p><strong>✔</strong> Medication counselling</p>
-            </div>
-            <div class="panel-footer">
-              <h3>GHS 50</h3>
-              <h4>For everyday health needs</h4>
-              <button class="btn btn-lg">Get Started</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Standard -->
-        <div class="col-sm-4 col-xs-12">
-          <div class="panel panel-default text-center">
-            <div class="panel-heading">
-              <h1>Standard</h1>
-            </div>
-            <div class="panel-body">
-              <p><strong>✔</strong> All Basic services</p>
-              <p><strong>✔</strong> Blood glucose &amp; cholesterol test</p>
-              <p><strong>✔</strong> Medication therapy review</p>
-              <p><strong>✔</strong> Vaccination administration</p>
-              <p><strong>✔</strong> Chronic disease monitoring</p>
-            </div>
-            <div class="panel-footer">
-              <h3>GHS 150</h3>
-              <h4>Most popular choice</h4>
-              <button class="btn btn-lg">Get Started</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Premium -->
-        <div class="col-sm-4 col-xs-12">
-          <div class="panel panel-default text-center">
-            <div class="panel-heading">
-              <h1>Premium</h1>
-            </div>
-            <div class="panel-body">
-              <p><strong>✔</strong> All Standard services</p>
-              <p><strong>✔</strong> Comprehensive health screening</p>
-              <p><strong>✔</strong> Personalized wellness plan</p>
-              <p><strong>✔</strong> Priority dispensing</p>
-              <p><strong>✔</strong> Dedicated pharmacist support</p>
-            </div>
-            <div class="panel-footer">
-              <h3>GHS 300</h3>
-              <h4>For advanced &amp; ongoing care</h4>
-              <button class="btn btn-lg">Get Started</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Contact Section -->
-    <div id="contact" class="container-fluid bg-grey">
-      <h2 class="text-center">Contact Us</h2>
-      <div class="row">
-        <div class="col-sm-5">
-          <p>Contact us and we'll get back to you within 24 hours.</p>
-          <p>
-            <span class="glyphicon glyphicon-map-marker"></span> Ghana, Accra,
-            Tse Addo
-          </p>
-          <p>
-            <span class="glyphicon glyphicon-phone"></span> +233 244 123 456
-          </p>
-          <p>
-            <span class="glyphicon glyphicon-envelope"></span>
-            info@pelbenpharmacy.com
-          </p>
-        </div>
-        <div class="col-sm-7 slideanim">
-          <div class="row">
-            <div class="col-sm-6 form-group">
-              <input
-                class="form-control"
-                id="name"
-                name="name"
-                placeholder="Name"
-                type="text"
-                required
-              />
-            </div>
-            <div class="col-sm-6 form-group">
-              <input
-                class="form-control"
-                id="email"
-                name="email"
-                placeholder="Email"
-                type="email"
-                required
-              />
-            </div>
-          </div>
-          <textarea
-            class="form-control"
-            id="comments"
-            name="comments"
-            placeholder="Comment"
-            rows="5"
-          ></textarea>
-          <br />
-          <div class="row">
-            <div class="col-sm-12 form-group">
-              <button class="btn btn-default pull-right" type="submit">
-                Send
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Location Map -->
-    <img
-      src="media/images/location.png"
-      class="w3-image w3-greyscale-min"
-      style="width: 100%"
-      alt="Pelben Pharmacy location map"
-    />
-
-    <footer class="container-fluid text-center">
-      <a href="#myPage" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
+    <h1 class="hero-headline">
+      Your health,<br>handled with <em>care</em>
+    </h1>
+    <p class="hero-sub">
+      Professional pharmacy services, health consultations, and medication management — all under one roof in Accra.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        View our services
       </a>
-      <p>
-        Website Created By
-        <a href="https://www.seoto.com" title="Visit seoto">www.seoto.com</a>
-      </p>
-    </footer>
+      <a href="#contact" class="btn-secondary">Get in touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat-item">
+        <div class="hero-stat-number">500+</div>
+        <div class="hero-stat-label">Patients served</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-number">6</div>
+        <div class="hero-stat-label">Core services</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat-item">
+        <div class="hero-stat-number">24h</div>
+        <div class="hero-stat-label">Response time</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-img-wrap">
+      <img src="media/images/pharmacist-portrait-black-woman.webp" alt="Hero image — pharmacist at work" class="hero-img-placeholder">
+      <!-- Replace src with your image: e.g. src="media/images/hero-pharmacist.jpg" -->
+      <!-- <div class="hero-img-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M6.5 20.5c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5"/></svg>
+        <span>Hero image — pharmacist at work</span>
+      </div> -->
+    </div>
+    <div class="hero-float-card">
+      <div class="hero-float-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z"/></svg>
+      </div>
+      <div class="hero-float-text">
+        <p>Prescription ready</p>
+        <p>Same-day dispensing</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script src="static/js/script.js"></script>
-  </body>
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-stack reveal">
+        <div class="about-img-main">
+          <!-- Replace with: src="media/images/about-pharmacy.jpg" -->
+           <img src="media/images/male-pharmacist-showing-female-customer.jpg" alt="Pharmacy interior / team photo" class="img-placeholder">
+          <!-- <div class="img-placeholder">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span>Pharmacy interior / team photo</span>
+          </div> -->
+        </div>
+        <div class="about-img-secondary">
+          <img src="media/images/pharm person 1.jpg" alt="Team photo" class="img-placeholder">
+          <!-- Replace with: src="media/images/about-team.jpg" -->
+        <!-- <div class="img-placeholder">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
+            <span>Team photo</span>
+          </div> -->
+        </div>
+      </div>
+      <div class="about-content">
+        <span class="eyebrow reveal">About us</span>
+        <h2 class="section-title reveal reveal-delay-1">A pharmacy built around the patient</h2>
+        <p class="section-sub reveal reveal-delay-2">We are a trusted pharmacy dedicated to providing quality healthcare solutions and exceptional service for all your health needs — guided by integrity and genuine care.</p>
+        <div class="about-features">
+          <div class="about-feature reveal reveal-delay-2">
+            <div class="about-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="about-feature-text">
+              <h4>Evidence-based practice</h4>
+              <p>Our pharmacists use modern technology and evidence-based approaches to address your health concerns effectively.</p>
+            </div>
+          </div>
+          <div class="about-feature reveal reveal-delay-3">
+            <div class="about-feature-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="about-feature-text">
+              <h4>Personalized attention</h4>
+              <p>Every patient receives individual care — we take the time to understand your needs and tailor our services accordingly.</p>
+            </div>
+          </div>
+          <div class="about-feature reveal reveal-delay-4">
+            <div class="about-feature-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="about-feature-text">
+              <h4>Efficient and affordable</h4>
+              <p>We help you save time and money while receiving the professional-grade care you and your family deserve.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <div class="container">
+    <div class="services-header">
+      <span class="eyebrow reveal">What we offer</span>
+      <h2 class="section-title reveal reveal-delay-1">Comprehensive pharmacy care</h2>
+      <p class="section-sub reveal reveal-delay-2">From prescription management to wellness programs — everything your family needs in one place.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12h6M12 9v6"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+        </div>
+        <h3>Prescription Management</h3>
+        <p>Accurate dispensing, automated refills, and medication synchronization to keep your treatment on track and save you time.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Specialized Care</h3>
+        <p>Personalized health consultations and specialized treatment plans tailored to your specific health conditions and goals.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Wellness &amp; Testing</h3>
+        <p>Routine immunizations, point-of-care health screenings, and personalized medication therapy reviews.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <h3>Health Education &amp; Advice</h3>
+        <p>Expert guidance on minor ailments, healthy lifestyles, nutrition, and disease prevention from qualified pharmacists.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        </div>
+        <h3>Monitoring &amp; Support</h3>
+        <p>Medication adherence programs plus structured support for smoking cessation, weight management, and chronic disease care.</p>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Emergency Medication Supply</h3>
+        <p>Essential medications available for emergency supply when your prescription is temporarily unavailable — fast and reliable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why-us" class="section">
+  <div class="container">
+    <div class="why-us-inner">
+      <div class="why-us-content">
+        <span class="eyebrow reveal">Why Pelben</span>
+        <h2 class="section-title reveal reveal-delay-1">Trusted care, rooted in community</h2>
+        <p class="section-sub reveal reveal-delay-2">We believe pharmacy is more than dispensing medicine — it's about building long-term health relationships with every family we serve.</p>
+        <div class="why-us-stats">
+          <div class="why-stat reveal reveal-delay-1">
+            <div class="why-stat-num">500+</div>
+            <div class="why-stat-label">Patients served across Accra</div>
+          </div>
+          <div class="why-stat reveal reveal-delay-2">
+            <div class="why-stat-num">6+</div>
+            <div class="why-stat-label">Years of community service</div>
+          </div>
+          <div class="why-stat reveal reveal-delay-3">
+            <div class="why-stat-num">3</div>
+            <div class="why-stat-label">Qualified pharmacists on staff</div>
+          </div>
+          <div class="why-stat reveal reveal-delay-4">
+            <div class="why-stat-num">24h</div>
+            <div class="why-stat-label">Response to all inquiries</div>
+          </div>
+        </div>
+      </div>
+      <div class="why-us-visual reveal reveal-delay-2">
+        <div class="why-img-main">
+          <img src="media/images/Pharmacist-Patient-Care.jpg" alt="Pharmacist with patient" class="img-placeholder">
+          <!-- Replace with: src="media/images/why-us.jpg" -->
+          <!-- <div class="img-placeholder">
+            <svg viewBox="0 0 24 24"><path d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0zM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0zM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003z"/></svg>
+            <span>Pharmacist with patient</span>
+          </div>
+        </div> -->
+        <div class="mission-card">
+          <p>Our mission</p>
+          <p>Affordable, trusted pharmacy care for every family we serve.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" class="section">
+  <div class="container">
+    <div class="portfolio-header">
+      <span class="eyebrow reveal">Our work</span>
+      <h2 class="section-title reveal reveal-delay-1">A glimpse of what we do</h2>
+    </div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item reveal">
+        <img src="media/images/prescription dispensing.jpg" alt="Prescription Dispensing photo" class="img-placeholder">
+        <!-- Replace with: <img src="media/images/prescription.jpg" alt="Prescription Dispensing" /> -->
+        <!-- <div class="img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          <span>Prescription Dispensing photo</span>
+        </div> -->
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-text">
+            <h4>Prescription Dispensing</h4>
+            <p>Accurate and timely medication dispensing</p>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item reveal reveal-delay-1">
+        <img src="media/images/vaccination.png" alt="Vaccinations photo" class="img-placeholder">
+        <!-- Replace with: <img src="media/images/vaccination.jpg" alt="Vaccinations" /> -->
+        <div class="img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9l-7 7-7-7"/><path d="M12 3v13M5 21h14"/></svg>
+          <span>Vaccinations photo</span>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-text">
+            <h4>Vaccinations</h4>
+            <p>Flu, travel, and routine vaccines on-site</p>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item reveal reveal-delay-2">
+        <img src="media/images/hz-health-screening-header.jpg" alt="Health Screenings photo" class="img-placeholder">
+        <!-- Replace with: <img src="media/images/screening.jpg" alt="Health Screenings" /> -->
+        <div class="img-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Health Screenings photo</span>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-overlay-text">
+            <h4>Health Screenings</h4>
+            <p>Blood pressure, glucose &amp; cholesterol checks</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section-sm">
+  <div class="container">
+    <div class="testimonials-header">
+      <span class="eyebrow reveal">Testimonials</span>
+      <h2 class="section-title reveal reveal-delay-1">What our patients say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">The staff are always friendly, professional, and ready to help. I get my prescriptions quickly and receive clear advice on how to take my medications.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">KM</div>
+          <div>
+            <div class="author-name">Kwame Mensah</div>
+            <div class="author-location">Tse Addo, Accra</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Excellent customer service! The pharmacists take the time to answer my questions and make sure I understand my treatment plan fully.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AB</div>
+          <div>
+            <div class="author-name">Akosua Baah</div>
+            <div class="author-location">East Legon, Accra</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="stars">
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">Wide range of medicines and healthcare products. Their team genuinely cares about customers' health — you can feel it in every interaction.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">YB</div>
+          <div>
+            <div class="author-name">Yaw Boateng</div>
+            <div class="author-location">Cantonments, Accra</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="pricing-header">
+      <span class="eyebrow reveal">Pricing</span>
+      <h2 class="section-title reveal reveal-delay-1">Service packages</h2>
+      <p class="section-sub reveal reveal-delay-2">Choose the level of care that works best for you and your family.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-top">
+          <div class="pricing-plan">Basic</div>
+          <div class="pricing-price">
+            <span class="pricing-currency">GHS</span>
+            <span class="pricing-amount">50</span>
+          </div>
+          <p class="pricing-desc">For everyday health needs</p>
+        </div>
+        <div class="pricing-body">
+          <ul class="pricing-features">
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Prescription dispensing
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              OTC medication advice
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Blood pressure check
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Basic health consultation
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Medication counselling
+            </li>
+          </ul>
+          <a href="#contact" class="pricing-cta">Get started</a>
+        </div>
+      </div>
+      <div class="pricing-card featured reveal reveal-delay-1">
+        <span class="featured-badge">Most popular</span>
+        <div class="pricing-top">
+          <div class="pricing-plan">Standard</div>
+          <div class="pricing-price">
+            <span class="pricing-currency">GHS</span>
+            <span class="pricing-amount">150</span>
+          </div>
+          <p class="pricing-desc">Complete everyday care</p>
+        </div>
+        <div class="pricing-body">
+          <ul class="pricing-features">
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Everything in Basic
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Blood glucose &amp; cholesterol test
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Medication therapy review
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Vaccination administration
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Chronic disease monitoring
+            </li>
+          </ul>
+          <a href="#contact" class="pricing-cta">Get started</a>
+        </div>
+      </div>
+      <div class="pricing-card reveal reveal-delay-2">
+        <div class="pricing-top">
+          <div class="pricing-plan">Premium</div>
+          <div class="pricing-price">
+            <span class="pricing-currency">GHS</span>
+            <span class="pricing-amount">300</span>
+          </div>
+          <p class="pricing-desc">Advanced &amp; ongoing care</p>
+        </div>
+        <div class="pricing-body">
+          <ul class="pricing-features">
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Everything in Standard
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Comprehensive health screening
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Personalized wellness plan
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Priority dispensing
+            </li>
+            <li>
+              <span class="check-icon"><svg viewBox="0 0 12 12"><polyline points="2 6 5 9 10 3"/></svg></span>
+              Dedicated pharmacist support
+            </li>
+          </ul>
+          <a href="#contact" class="pricing-cta">Get started</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBE BANNER -->
+<div class="subscribe-banner">
+  <div class="container">
+    <div class="subscribe-inner">
+      <div class="subscribe-copy">
+        <h3>Stay on top of your health</h3>
+        <p>Get health tips, pharmacy updates, and wellness reminders — no spam, ever.</p>
+      </div>
+      <div class="subscribe-form">
+        <input type="email" placeholder="Your email address" />
+        <button type="button">Subscribe</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow reveal">Contact us</span>
+        <h2 class="section-title reveal reveal-delay-1">Let's talk about your health</h2>
+        <p class="section-sub reveal reveal-delay-2">Contact us and we'll get back to you within 24 hours. We're here to help.</p>
+        <div class="contact-details">
+          <div class="contact-item reveal reveal-delay-2">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Address</div>
+              <div class="contact-item-value">Tse Addo, Accra, Ghana</div>
+            </div>
+          </div>
+          <div class="contact-item reveal reveal-delay-3">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.07 6.07l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <div class="contact-item-value">+233 244 123 456</div>
+            </div>
+          </div>
+          <div class="contact-item reveal reveal-delay-4">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-value">info@pelbenpharmacy.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal reveal-delay-1">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full name</label>
+            <input type="text" id="name" placeholder="Kwame Mensah" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" id="email" placeholder="kwame@example.com" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" placeholder="How can we help?" />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Tell us more about your health needs or query..."></textarea>
+        </div>
+        <button type="button" class="form-submit">Send message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION MAP PLACEHOLDER -->
+<div style="width:100%; height:280px; background:var(--off-white); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:12px; color:var(--text-light);">
+  <!-- Replace this div with: <img src="media/images/location.png" style="width:100%;height:280px;object-fit:cover;" alt="Pelben Pharmacy location" /> -->
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+  <span style="font-size:14px;">Location map image goes here</span>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="nav-logo" href="#hero" style="text-decoration:none;">
+          <div class="nav-logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+          <span class="nav-logo-text footer-logo-text">Pelben Pharmacy</span>
+        </a>
+        <p>Trusted pharmacy care for every family in Accra — professional, affordable, and compassionate.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Prescription Management</a></li>
+          <li><a href="#services">Specialized Care</a></li>
+          <li><a href="#services">Wellness &amp; Testing</a></li>
+          <li><a href="#services">Health Education</a></li>
+          <li><a href="#services">Emergency Supply</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#about">About us</a></li>
+          <li><a href="#portfolio">Our work</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Hours</h5>
+        <ul>
+          <li><a href="#contact">Mon – Fri: 8am – 8pm</a></li>
+          <li><a href="#contact">Saturday: 9am – 6pm</a></li>
+          <li><a href="#contact">Sunday: 10am – 4pm</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Pelben Pharmacy. All rights reserved.</p>
+      <p>Built by <a href="https://www.seoto.com" style="color:rgba(255,255,255,0.6); text-decoration:none;">www.seoto.com</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Back to top
+  const btt = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 400);
+  });
+  btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Hero visible immediately
+  document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
+</script>
+</body>
 </html>
