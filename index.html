@@ -253,7 +253,52 @@
     }
 
     /* ── HERO ── */
+    #hero-section {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Background image layer */
+    #hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    #hero-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    /* Placeholder shown until real bg image is supplied */
+    #hero-bg-placeholder {
+      width: 100%; height: 100%;
+      background:
+        repeating-linear-gradient(
+          45deg,
+          rgba(15,110,86,0.04) 0px,
+          rgba(15,110,86,0.04) 1px,
+          transparent 1px,
+          transparent 20px
+        ),
+        var(--teal-50);
+    }
+    /* Warm tint overlay — keeps text readable, brand colour bleeds through */
+    #hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(249,248,245,0.88);
+      z-index: 1;
+    }
+
+    /* Content sits above bg + overlay */
     #hero {
+      position: relative;
+      z-index: 2;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -358,23 +403,91 @@
       position: relative;
       background: var(--teal-50);
     }
-    .hero-img-wrap img {
+
+    /* Slideshow */
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      will-change: opacity;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide img {
       width: 100%; height: 100%;
       object-fit: cover;
       display: block;
+      animation: none;
     }
-    .hero-img-placeholder {
+    .hero-slide.active img {
+      animation: ken-burns 6s ease-in-out forwards;
+    }
+    @keyframes ken-burns {
+      from { transform: scale(1);    transform-origin: center center; }
+      to   { transform: scale(1.06); transform-origin: center center; }
+    }
+    .hero-slide-placeholder {
       width: 100%; height: 100%;
-      background: linear-gradient(145deg, var(--teal-50) 0%, var(--teal-100) 100%);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       color: var(--teal-600);
     }
-    .hero-img-placeholder svg { width: 48px; height: 48px; opacity: 0.5; }
-    .hero-img-placeholder span { font-size: 13px; opacity: 0.6; }
+    .hero-slide-placeholder svg { width: 40px; height: 40px; opacity: 0.45; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .hero-slide-placeholder span { font-size: 12px; opacity: 0.6; max-width: 140px; text-align: center; line-height: 1.5; }
+
+    /* Slide 1 bg tint */
+    .hero-slide:nth-child(1) .hero-slide-placeholder { background: var(--teal-50); }
+    .hero-slide:nth-child(2) .hero-slide-placeholder { background: #dff0ea; }
+    .hero-slide:nth-child(3) .hero-slide-placeholder { background: #e8f5f0; }
+    .hero-slide:nth-child(4) .hero-slide-placeholder { background: #d6ede5; }
+
+    /* Caption overlay */
+    .hero-slide-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px 20px 18px;
+      background: linear-gradient(to top, rgba(4,52,44,0.72) 0%, transparent 100%);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.6s 0.5s ease, transform 0.6s 0.5s ease;
+    }
+    .hero-slide.active .hero-slide-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero-slide-caption p {
+      font-size: 13px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.92);
+      letter-spacing: 0.02em;
+    }
+
+    /* Dot indicators */
+    .hero-dots {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      display: flex;
+      gap: 6px;
+      z-index: 2;
+    }
+    .hero-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.3s, width 0.3s;
+    }
+    .hero-dot.active {
+      background: #fff;
+      width: 18px;
+      border-radius: 3px;
+    }
     .hero-float-card {
       position: absolute;
       bottom: 28px;
@@ -408,6 +521,7 @@
 
     @media (max-width: 900px) {
       #hero { grid-template-columns: 1fr; min-height: auto; padding: 100px 24px 60px; gap: 40px; }
+      #hero-section { min-height: auto; }
       .hero-visual { max-width: 480px; margin: 0 auto; }
       .hero-float-card { left: -10px; }
     }
@@ -955,7 +1069,21 @@
 </div>
 
 <!-- HERO -->
-<section id="hero" class="container">
+<section id="hero-section">
+
+  <!-- Background image — replace the placeholder div with your image:
+       <img src="media/images/hero-bg.jpg" alt="" aria-hidden="true">
+       Good choices: soft pharmacy shelf, abstract bokeh of medicine bottles,
+       or a wide-angle pharmacy interior shot. Works best slightly desaturated. -->
+  <div id="hero-bg">
+
+    <img src="media/images/Image.png" alt="" aria-hidden="true" id="hero-bg-placeholder">
+  </div>
+
+  <!-- Warm tint so content stays readable -->
+  <div id="hero-overlay"></div>
+
+<div id="hero">
   <div class="hero-content">
     <div class="hero-trust-badge">
       <span class="hero-trust-dot"></span>
@@ -992,14 +1120,61 @@
     </div>
   </div>
   <div class="hero-visual">
-    <div class="hero-img-wrap">
-      <img src="media/images/pharmacist-portrait-black-woman.webp" alt="Hero image — pharmacist at work" class="hero-img-placeholder">
-      <!-- Replace src with your image: e.g. src="media/images/hero-pharmacist.jpg" -->
-      <!-- <div class="hero-img-placeholder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="10" r="3"/><path d="M6.5 20.5c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5"/></svg>
-        <span>Hero image — pharmacist at work</span>
-      </div> -->
+    <div class="hero-img-wrap" id="hero-slideshow">
+
+      <!-- SLIDE 1 — replace div with: <img src="media/images/hero-pharmacist.jpg" alt="Pharmacist at work"> -->
+
+      <div class="hero-slide active">
+        <img src="media/images/pharmacist-portrait-black-woman.webp" alt="Pharmacist consulting a patient" class="hero-slide-placeholder">
+        <div class="hero-slide-placeholder">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
+          <span>Pharmacist consulting a patient</span>
+        </div>
+        <div class="hero-slide-caption"><p>Personalized health consultation</p></div>
+      </div>
+
+      <!-- SLIDE 2 — replace div with: <img src="media/images/hero-interior.jpg" alt="Pharmacy interior"> -->
+       
+      <div class="hero-slide">
+        <img src="media/images/istockphoto.jpg" alt="" class="img-placeholder">
+        <div class="hero-slide-placeholder">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><path d="M8 3v18M2 9h6M2 15h6"/></svg>
+          <span>Pharmacy interior &amp; dispensary</span>
+        </div>
+        <div class="hero-slide-caption"><p>Modern, well-stocked dispensary</p></div>
+      </div>
+
+      <!-- SLIDE 3 — replace div with: <img src="media/images/hero-screening.jpg" alt="Health screening"> -->
+      
+      <div class="hero-slide">
+        <img src="media/images/pexels-ai25studioai-5214956.jpg" alt="Blood pressure" class="img-placeholder">
+        <div class="hero-slide-placeholder">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Blood pressure &amp; glucose screening</span>
+        </div>
+        <div class="hero-slide-caption"><p>On-site health screenings</p></div>
+      </div>
+
+      <!-- SLIDE 4 — replace div with: <img src="media/images/hero-family.jpg" alt="Family at pharmacy"> -->
+       
+      <div class="hero-slide">
+        <img src="media/images/Pharmacist 2.jpg" alt="Family at pharmacy" class="img-placeholder">
+        <div class="hero-slide-placeholder">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>Family picking up medication</span>
+        </div>
+        <div class="hero-slide-caption"><p>Care for the whole family</p></div>
+      </div>
+
+      <!-- Dot indicators -->
+      <div class="hero-dots" id="hero-dots">
+        <button class="hero-dot active" aria-label="Slide 1"></button>
+        <button class="hero-dot" aria-label="Slide 2"></button>
+        <button class="hero-dot" aria-label="Slide 3"></button>
+        <button class="hero-dot" aria-label="Slide 4"></button>
+      </div>
     </div>
+
     <div class="hero-float-card">
       <div class="hero-float-icon">
         <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z"/></svg>
@@ -1010,7 +1185,8 @@
       </div>
     </div>
   </div>
-</section>
+  </div><!-- /#hero -->
+</section><!-- /#hero-section -->
 
 <!-- ABOUT -->
 <section id="about" class="section">
@@ -1588,6 +1764,40 @@
 
   // Hero visible immediately
   document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
+
+  // Hero slideshow
+  (function() {
+    const slides = document.querySelectorAll('#hero-slideshow .hero-slide');
+    const dots   = document.querySelectorAll('#hero-dots .hero-dot');
+    let current  = 0;
+    let timer;
+
+    function goTo(n) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (n + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    function next() { goTo(current + 1); }
+
+    function startTimer() {
+      clearInterval(timer);
+      timer = setInterval(next, 5000);
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => { goTo(i); startTimer(); });
+    });
+
+    startTimer();
+
+    // Pause on hover
+    const wrap = document.getElementById('hero-slideshow');
+    wrap.addEventListener('mouseenter', () => clearInterval(timer));
+    wrap.addEventListener('mouseleave', startTimer);
+  })();
 </script>
 </body>
 </html>
