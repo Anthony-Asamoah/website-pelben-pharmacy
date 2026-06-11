@@ -379,6 +379,7 @@
       font-weight: 500;
       color: var(--teal-800);
       line-height: 1;
+      font-variant-numeric: tabular-nums;
     }
     .hero-stat-label {
       font-size: 13px;
@@ -527,12 +528,33 @@
     @media (max-width: 900px) {
       #hero { grid-template-columns: 1fr; min-height: auto; padding: 100px 24px 60px; gap: 40px; }
       #hero-section { min-height: auto; }
-      .hero-visual { max-width: 480px; margin: 0 auto; }
-      .hero-float-card { left: -10px; }
+      .hero-visual { width: 100%; max-width: 480px; margin: 0 auto; overflow: visible; }
+      /* Card hangs off the bottom-left edge so it clears the slide caption */
+      .hero-float-card { left: 16px; bottom: -22px; }
+      /* Move the rotating caption to the top so the bottom strip is reserved
+         for the float-card (bottom-left) and dots (bottom-right) — no overlap */
+      .hero-slide-caption {
+        top: 0; bottom: auto;
+        padding: 18px 20px 40px;
+        background: linear-gradient(to bottom, rgba(4,52,44,0.78) 0%, transparent 100%);
+        text-align: center;
+        transform: translateY(-6px);
+      }
     }
     @media (max-width: 480px) {
       .hero-stats { gap: 20px; }
       .hero-actions { flex-direction: column; }
+      /* Keep the tall, desktop-style portrait crop on phones */
+      .hero-img-wrap { aspect-ratio: 4 / 5; }
+      .hero-float-card {
+        left: 14px;
+        bottom: -18px;
+        padding: 10px 14px;
+        gap: 10px;
+      }
+      .hero-float-icon { width: 32px; height: 32px; }
+      .hero-float-text p:first-child { font-size: 12px; }
+      .hero-float-text p:last-child { font-size: 11px; }
     }
 
     /* ── ABOUT ── */
@@ -597,9 +619,10 @@
     .about-feature-text p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
 
     @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; gap: 48px; }
-      .about-content { padding-right: 0; }
-      .about-img-secondary { bottom: -16px; right: -12px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-content { padding-right: 0; order: 1; }
+      .about-img-stack { order: 2; margin-top: 4px; }
+      .about-img-secondary { bottom: -12px; right: -8px; width: 48%; }
     }
 
     /* ── SERVICES ── */
@@ -672,6 +695,7 @@
       color: var(--teal-100);
       line-height: 1;
       margin-bottom: 8px;
+      font-variant-numeric: tabular-nums;
     }
     .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.5; }
     .why-us-visual {
@@ -796,6 +820,8 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
     }
     .testimonial-quote {
       font-family: var(--font-display);
@@ -815,6 +841,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      margin-top: auto;
     }
     .author-avatar {
       width: 40px; height: 40px;
@@ -1768,6 +1795,51 @@
 
   // Hero visible immediately
   document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
+
+  // Animated stat counters
+  (function() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function countUp(el) {
+      if (el.dataset.counted) return;
+      el.dataset.counted = '1';
+
+      const text = el.textContent.trim();
+      const match = text.match(/^(\D*)(\d[\d,]*)(.*)$/); // prefix, number, suffix
+      if (!match) return;
+
+      const prefix = match[1];
+      const target = parseInt(match[2].replace(/,/g, ''), 10);
+      const suffix = match[3];
+
+      if (reduceMotion || isNaN(target)) { el.textContent = text; return; }
+
+      const duration = 1500;
+      const start = performance.now();
+
+      function frame(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        el.textContent = prefix + Math.round(target * eased) + suffix;
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // Hero stats are visible on load
+    document.querySelectorAll('.hero-stat-number').forEach(countUp);
+
+    // "Why us" stats animate when scrolled into view
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          countUp(entry.target);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.why-stat-num').forEach(el => statObserver.observe(el));
+  })();
 
   // Hero slideshow
   (function() {
