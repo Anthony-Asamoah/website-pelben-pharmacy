@@ -375,6 +375,7 @@
       font-weight: 500;
       color: var(--teal-800);
       line-height: 1;
+      font-variant-numeric: tabular-nums;
     }
     .hero-stat-label {
       font-size: 13px;
@@ -690,6 +691,7 @@
       color: var(--teal-100);
       line-height: 1;
       margin-bottom: 8px;
+      font-variant-numeric: tabular-nums;
     }
     .why-stat-label { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.5; }
     .why-us-visual {
@@ -814,6 +816,8 @@
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
       padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
     }
     .testimonial-quote {
       font-family: var(--font-display);
@@ -833,6 +837,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      margin-top: auto;
     }
     .author-avatar {
       width: 40px; height: 40px;
@@ -1786,6 +1791,51 @@
 
   // Hero visible immediately
   document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
+
+  // Animated stat counters
+  (function() {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function countUp(el) {
+      if (el.dataset.counted) return;
+      el.dataset.counted = '1';
+
+      const text = el.textContent.trim();
+      const match = text.match(/^(\D*)(\d[\d,]*)(.*)$/); // prefix, number, suffix
+      if (!match) return;
+
+      const prefix = match[1];
+      const target = parseInt(match[2].replace(/,/g, ''), 10);
+      const suffix = match[3];
+
+      if (reduceMotion || isNaN(target)) { el.textContent = text; return; }
+
+      const duration = 1500;
+      const start = performance.now();
+
+      function frame(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        el.textContent = prefix + Math.round(target * eased) + suffix;
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // Hero stats are visible on load
+    document.querySelectorAll('.hero-stat-number').forEach(countUp);
+
+    // "Why us" stats animate when scrolled into view
+    const statObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          countUp(entry.target);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.why-stat-num').forEach(el => statObserver.observe(el));
+  })();
 
   // Hero slideshow
   (function() {
